@@ -9,7 +9,7 @@ import org.koin.dsl.module
 object PresentationModule {
 
     fun load(){
-        loadKoinModules(listOf(viewModelModule()))
+        loadKoinModules(viewModelModule())
     }
 
     private fun viewModelModule(): Module {

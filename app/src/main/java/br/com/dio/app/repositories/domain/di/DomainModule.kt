@@ -8,9 +8,6 @@ import org.koin.dsl.module
 
 object DomainModule {
 
-
-    private val TAG: String = "OkHTTP"
-
     fun load(){
         loadKoinModules(listOf(useCaseModule()))
     }

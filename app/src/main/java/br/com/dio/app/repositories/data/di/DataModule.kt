@@ -19,14 +19,14 @@ object DataModule {
     private val TAG: String = "OkHTTP"
 
     fun load(){
-        loadKoinModules(listOf(networkModules(), repositoryModule()))
+        loadKoinModules(networkModules()+ repositoryModule())
     }
 
     private fun networkModules(): Module{
         return module {
             single {
             val interceptor = HttpLoggingInterceptor{
-                Log.v(TAG, it, )
+                Log.v(TAG, it )
             }
 
                 interceptor.level = HttpLoggingInterceptor.Level.BODY

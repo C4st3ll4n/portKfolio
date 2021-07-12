@@ -14,6 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private val mainViewModel by viewModel<MainViewModel>()
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val adapter by lazy { RepoListAdapter()}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +22,14 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         setSupportActionBar(binding.toolbar)
 
-        mainViewModel.repos.observe(this,{
+        mainViewModel.getRepositories("C4st3ll4n")
 
+        mainViewModel.repos.observe(this,{
+            when (it){
+                is MainViewModel.State.Error -> { }
+                MainViewModel.State.Loading -> {}
+                is MainViewModel.State.Success -> adapter.submitList(it.list)
+            }
         })
     }
 
