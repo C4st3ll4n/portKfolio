@@ -10,7 +10,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
 import org.koin.dsl.module
-import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -19,7 +18,7 @@ object DataModule {
     private val TAG: String = "OkHTTP"
 
     fun load(){
-        loadKoinModules(networkModules()+ repositoryModule())
+        loadKoinModules(networkModules() + repositoryModule())
     }
 
     private fun networkModules(): Module{
@@ -55,7 +54,7 @@ object DataModule {
         }
     }
 
-    private inline fun <reified T> createService(converter: Converter.Factory, client: OkHttpClient): T{
+    private inline fun <reified T> createService(client: OkHttpClient, converter: GsonConverterFactory): T{
         return Retrofit.Builder()
             .baseUrl("https://api.github.com/")
             .client(client)
